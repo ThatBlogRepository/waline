@@ -413,33 +413,21 @@ module.exports = class extends think.Service {
       },
     };
 
-    content = nunjucks.renderString(
-      think.config('LarkTemplate') ||
-        `【网站名称】：{{site.name|safe}} \n【评论者昵称】：{{self.nick}}\n【评论者邮箱】：{{self.mail}}\n【内容】：{{self.comment}}【地址】：{{site.postUrl}}`,
-      data,
-    );
-
-    const post = {
-      en_us: {
-        title: this.ctx.locale(title, data),
-        content: [
-          [
-            {
-              tag: 'text',
-              text: content,
-            },
-          ],
-        ],
-      },
-    };
-
     let signData = {};
     const msg = {
-      msg_type: 'post',
-      content: {
-        post,
-      },
-    };
+      "type":"template",
+      "data":{
+          "template_id":"ctp_AAi6jxo9neS2",    
+          "template_variable":
+          {    
+            "c_msg": self.comment,
+            "c_user": data.self.nick,
+            "c_url": site.postUrl,
+            "c_time": new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, 19),
+            "c_email": self.mail   
+          }       
+      }
+  };
 
     const sign = (timestamp, secret) => {
       const signStr = timestamp + '\n' + secret;
