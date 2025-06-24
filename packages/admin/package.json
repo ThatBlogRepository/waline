@@ -1,8 +1,7 @@
 {
   "name": "@waline/admin",
-  "version": "0.25.3",
+  "version": "0.26.0",
   "description": "management system for waline",
-  "type": "module",
   "keywords": [
     "waline",
     "valine",
@@ -20,9 +19,10 @@
   },
   "license": "MIT",
   "author": "lizheming <i@imnerd.org>",
+  "type": "module",
+  "exports": "./dist/admin.js",
   "main": "dist/admin.js",
   "browser": "dist/admin.js",
-  "exports": "./dist/admin.js",
   "files": [
     "dist"
   ],
@@ -31,9 +31,6 @@
     "clean": "rimraf ./dist",
     "dev": "vite",
     "prepublishOnly": "pnpm build"
-  },
-  "publishConfig": {
-    "provenance": true
   },
   "browserslist": {
     "production": [
@@ -51,18 +48,25 @@
   },
   "devDependencies": {
     "@rematch/core": "2.2.0",
-    "base-icon": "2.2.1",
+    "base-icon": "2.3.2",
     "classnames": "2.5.1",
-    "i18next": "23.7.16",
-    "i18next-browser-languagedetector": "7.2.0",
+    "i18next": "25.2.1",
+    "i18next-browser-languagedetector": "8.2.0",
     "md5": "2.3.0",
-    "qrcode.react": "3.1.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-i18next": "14.0.0",
-    "react-redux": "9.0.4",
-    "react-router-dom": "6.21.1",
+    "qrcode.react": "4.2.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-i18next": "15.5.2",
+    "react-redux": "9.2.0",
+    "react-router": "7.6.2",
     "redux": "5.0.1",
-    "typescript": "5.3.3"
+    "typescript": "5.8.3",
+    "vite": "6.3.5"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "provenance": true
   }
 }

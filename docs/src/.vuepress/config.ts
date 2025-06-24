@@ -1,7 +1,6 @@
-import { path } from '@vuepress/utils';
+import { viteBundler } from '@vuepress/bundler-vite';
 import { defineUserConfig } from 'vuepress';
-import { redirectPlugin } from 'vuepress-plugin-redirect';
-import { addViteSsrNoExternal } from 'vuepress-shared';
+import { path } from 'vuepress/utils';
 
 import theme from './theme.js';
 
@@ -19,29 +18,26 @@ export default defineUserConfig({
     },
   },
 
+  bundler: viteBundler({
+    viteOptions: {
+      ssr: {
+        noExternal: ['@fancyapps/ui'],
+      },
+    },
+  }),
+
   markdown: {
-    code: {
-      lineNumbers: 20,
+    importCode: {
+      handleImportPath: (str) =>
+        str === '@waline/api/types'
+          ? path.resolve(__dirname, '../../../packages/api/dist/api.d.ts')
+          : str,
     },
   },
 
   theme,
 
-  plugins: [redirectPlugin()],
-
   alias: {
     '@MigrationTool': path.resolve(__dirname, './components/MigrationTool.vue'),
-    '@theme-hope/components/HomePage': path.resolve(
-      __dirname,
-      './components/HomePage',
-    ),
-    '@theme-hope/components/NormalPage': path.resolve(
-      __dirname,
-      './components/NormalPage',
-    ),
-  },
-
-  extendsBundlerOptions: (bundlerOptions, app) => {
-    addViteSsrNoExternal(bundlerOptions, app, '@fancyapps/ui');
   },
 });

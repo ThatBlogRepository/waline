@@ -1,10 +1,10 @@
-import { type IGif } from '@giphy/js-types';
+import type { IGif } from '@giphy/js-types';
 
-import {
-  type WalineEmojiPresets,
-  type WalineMeta,
-  type WalineSearchOptions,
-  type WalineSearchResult,
+import type {
+  WalineEmojiPresets,
+  WalineMeta,
+  WalineSearchOptions,
+  WalineSearchResult,
 } from '../typings/index.js';
 
 const AVAILABLE_META: WalineMeta[] = ['nick', 'mail', 'link'];
@@ -15,8 +15,6 @@ export const getMeta = (meta: WalineMeta[]): WalineMeta[] =>
 export const DEFAULT_EMOJI: WalineEmojiPresets[] = [
   '//unpkg.com/@waline/emojis@1.1.0/weibo',
 ];
-
-export const DEFAULT_LANG = 'en-US';
 
 export const DEFAULT_REACTION = [
   '//unpkg.com/@waline/emojis/tieba/tieba_agree.png',
@@ -35,12 +33,12 @@ export const defaultUploadImage = (file: File): Promise<string> =>
     const reader = new FileReader();
 
     reader.readAsDataURL(file);
-    reader.onload = (): void => resolve(reader.result?.toString() || '');
+    reader.onload = (): void => resolve(reader.result as string);
     reader.onerror = reject;
   });
 
 export const defaultTeXRenderer = (blockMode: boolean): string =>
-  blockMode === true
+  blockMode
     ? '<p class="wl-tex">TeX is not available in preview</p>'
     : '<span class="wl-tex">TeX is not available in preview</span>';
 
@@ -75,7 +73,7 @@ export const getDefaultSearchOptions = (lang: string): WalineSearchOptions => {
         ...params,
       }).toString()}`,
     )
-      .then((resp) => <Promise<GifResult>>resp.json())
+      .then((resp) => resp.json() as Promise<GifResult>)
       .then(({ data }) =>
         data.map((gif) => ({
           title: gif.title,

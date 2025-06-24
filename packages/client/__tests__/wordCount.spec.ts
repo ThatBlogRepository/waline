@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { getWords, getChinese, getWordNumber } from '../src/utils/wordCount';
+import { getChinese, getWordNumber, getWords } from '../src/utils/wordCount.js';
 
 describe('Words test', () => {
   it('Should count empty content correctly', () => {
@@ -18,7 +18,7 @@ describe('Words test', () => {
     const chineseWords =
       getChinese(
         'Waline - 一款从 Valine 衍生的带后端评论系统。可以将 Waline 等价成 With backend Valine.',
-      ) || [];
+      ) ?? [];
 
     expect(chineseWords.join('')).toEqual(
       '一款从衍生的带后端评论系统可以将等价成',
@@ -94,7 +94,7 @@ describe('Words test', () => {
   <script type="module">
     import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
 
-    Waline.init({
+    init({
       el: '#waline',
       serverURL: 'https://your-domain.vercel.app',
     });
@@ -111,12 +111,6 @@ describe('Words test', () => {
       'html',
       'head',
       '...',
-      'script src',
-      'https',
-      'unpkg.com',
-      'waline',
-      'client',
-      'script',
       'link\n    rel',
       'stylesheet',
       'href',
@@ -124,7 +118,7 @@ describe('Words test', () => {
       'unpkg.com',
       'waline',
       'client',
-      'v2',
+      'v3',
       'dist',
       'waline.css',
       '...',
@@ -134,8 +128,19 @@ describe('Words test', () => {
       'div id',
       'waline',
       'div',
-      'script',
-      'Waline.init',
+      'script type',
+      'module',
+      'import',
+      'init',
+      'from',
+      'https',
+      'unpkg.com',
+      'waline',
+      'client',
+      'v3',
+      'dist',
+      'waline.js',
+      'init',
       'el',
       'waline',
       `,
@@ -148,6 +153,6 @@ describe('Words test', () => {
       'body',
     ]);
 
-    expect(getWordNumber(codeBlock)).toEqual(40);
+    expect(getWordNumber(codeBlock)).toEqual(45);
   });
 });

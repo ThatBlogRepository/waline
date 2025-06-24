@@ -1,7 +1,6 @@
 ---
 title: Component Props
 icon: config
-redirectFrom: /en/reference/component.html
 ---
 
 ## serverURL
@@ -48,6 +47,10 @@ Optional value:
 - `'pt-BR'`
 - `'ru'`
 - `'ru-RU'`
+- `fr-FR`
+- `fr`
+- `'es'`
+- `'es-MX'`
 
 ## locale
 
@@ -60,7 +63,7 @@ Waline Locales.
 
 ## emoji
 
-- Type: `(string | WalineEmojiInfo)[] | false`
+- Type: `(string | WalineEmojiInfo)[] | boolean`
 
   ```ts
   type WalineEmojiPresets = `http://${string}` | `https://${string}`;
@@ -174,7 +177,7 @@ number of comments per page.
 
 ## imageUploader
 
-- Type: `WalineImageUploader | false`
+- Type: `WalineImageUploader | boolean`
 
   ```ts
   type WalineImageUploader = (image: File) => Promise<string>;
@@ -191,7 +194,7 @@ The function should receive an image object and return a Promise that provides t
 
 ## highlighter
 
-- Type: `WalineHighlighter | false`
+- Type: `WalineHighlighter | boolean`
 
   ```ts
   type WalineHighlighter = (code: string, lang: string) => string;
@@ -208,7 +211,7 @@ You can pass in a code highlighter of your own, or set to `false` to disable cod
 
 ## texRenderer
 
-- Type: `WalineTeXRenderer | false`
+- Type: `WalineTeXRenderer | boolean`
 
   ```ts
   type WalineTeXRenderer = (blockMode: boolean, tex: string) => string;
@@ -228,7 +231,7 @@ You can import $\TeX$ renderer to provide preview feature. We recommend you to u
 
 ## search
 
-- Type: `WalineSearchOptions | false`
+- Type: `WalineSearchOptions | boolean`
 
   ```ts
   interface WalineSearchImageData extends Record<string, unknown> {
@@ -282,15 +285,14 @@ You can import $\TeX$ renderer to provide preview feature. We recommend you to u
 
 - Required: No
 - Details:
+  Customize search features, you can disable search function by setting it to `false`.
 
-Customize search features, you can disable search function by setting it to `false`.
-
-## copyright
+## noCopyright
 
 - Type: `boolean`
-- Default: `true`
+- Default: `false`
 
-Whether show copyright and version in footer.
+Whether hide copyright and version in footer.
 
 ::: tip
 

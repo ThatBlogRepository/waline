@@ -1,7 +1,7 @@
 ---
 title: 独立部署
 icon: server
-redirectFrom: /guide/server/vps-deploy.html
+order: -1
 ---
 
 如果你担忧免费平台的请求延时，你也可以选择部署在自己的服务器上。
@@ -47,7 +47,7 @@ services:
     image: lizheming/waline:latest
     restart: always
     ports:
-      - 127.0.0.1:8360:8360
+      - 8360:8360
     volumes:
       - ${PWD}/data:/app/data
     environment:
